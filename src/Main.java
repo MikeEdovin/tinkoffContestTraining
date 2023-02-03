@@ -4,43 +4,32 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) {
-        int monthlyCost,includedAmount,extraCost,quantity;
-        int[] in=getInput();
-        if(in!=null){
-            monthlyCost=in[0];
-            includedAmount=in[1];
-            extraCost=in[2];
-            quantity=in[3];
-            System.out.print(calculate(monthlyCost,includedAmount,extraCost,quantity));
+        int nrOfPersons=getInput();
+            System.out.print(calculate(nrOfPersons));
         }
 
+    public static int calculate(int input) {
+        int counter = 0;
+        while (input != 1) {
+            if (input % 2 == 1) {
+               input += 1;
+            }
+            input=input/2;
+            counter += 1;
+        }
+        return counter ;
     }
 
-    public static int calculate(int monthlyCost,int includedAmount,int extraCost,int quantity){
-        if(quantity<=includedAmount){
-            return monthlyCost;
-        }
-        else{
-           return  monthlyCost+(quantity-includedAmount)*extraCost;
-        }
-    }
-
-
-    public static int[] getInput() {
-        int[] input=new int[4];
+    public static int getInput() {
         try{
             BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
             String string=br.readLine();
-            String[] in=string.split("\\s+");
-            for(int i=0;i<in.length;i++){
-                input[i]=Integer.parseInt(in[i]);
-            }
-            return input;
+            return Integer.parseInt(string);
         }
         catch (IOException e){
             e.printStackTrace();
         }
-        return null;
+        return 0;
 
     }
 }
