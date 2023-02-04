@@ -22,7 +22,7 @@ public static class Input {
     private long result;
     public void getInput() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String string = br.readLine();
             String[] first = string.split("\\s+");
             start = Long.parseLong(first[0]);
