@@ -10,6 +10,7 @@ public class Main {
         input.generateEnd();
         input.calculate();
         input.display();
+
     }
 
 public static class Input {
@@ -27,19 +28,23 @@ public static class Input {
             String[] first = string.split("\\s+");
             start = Long.parseLong(first[0]);
             end = Long.parseLong(first[1]);
+            if(end<start){
+                System.exit(0);
+            }
             nrOfStartDigits= first[0].length();
             nrOfEndDigits=first[1].length();
-        } catch (IOException e) {
+        } catch (IOException|ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
     }
     public void calculate() {
-        result = (nrOfEndDigits - nrOfStartDigits) * 9+9;
+
+            result = (nrOfEndDigits - nrOfStartDigits) * 9 + 9;
             for (long item : generatedStart) {
                 if (item < start) {
                     result--;
                 }
-                if(item>start){
+                if (item > start) {
                     break;
                 }
             }
@@ -47,10 +52,11 @@ public static class Input {
                 if (item > end) {
                     result--;
                 }
-                if(item<end){
+                if (item < end) {
                     break;
                 }
             }
+
     }
     private void generateBegin(){
         for(int i=1;i<10;i++) {
