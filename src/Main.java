@@ -9,43 +9,39 @@ public class Main {
     }
 
 public static class Input {
-    private int nrOfEmployes;
-    private int time;
-    private int[] floors;
-    private int timePerson;
+    private int quantity;
+    private int nrOfReplacement;
+    private int[] numbers;
     private int result;
     public void getInput() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("input.txt"));
             String string = br.readLine();
             String[] first = string.split("\\s+");
-            nrOfEmployes = Integer.parseInt(first[0]);
-            time = Integer.parseInt(first[1]);
-            floors = new int[nrOfEmployes];
+            quantity = Integer.parseInt(first[0]);
+            nrOfReplacement = Integer.parseInt(first[1]);
+            numbers = new int[quantity];
 
             String secondString = br.readLine();
             String[] second = secondString.split("\\s+");
             for (int i = 0; i < second.length; i++) {
-                floors[i] = Integer.parseInt(second[i]);
+                numbers[i] = Integer.parseInt(second[i]);
             }
-            String third = br.readLine();
-            timePerson = Integer.parseInt(third)-1;
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void calculate() {
-        if(time>floors[timePerson]-floors[0]||time>floors[nrOfEmployes-1]-floors[timePerson]){
-            result= floors[nrOfEmployes-1]-floors[0];
-        }else{
-            int left=floors[timePerson]-floors[0];
-            int right=floors[nrOfEmployes-1]-floors[timePerson];
-            result=Math.min(left,right)*2+Math.max(left,right);
-        }
+
     }
     public void display(){
-        System.out.print(result);
+        for(int i=0;i<quantity;i++) {
+            System.out.print(numbers[i]+" ");
+        }
+        System.out.println();
+        for(int i=0;i<quantity;i++) {
+            System.out.print(Integer.toBinaryString(numbers[i])+" ");
+        }
     }
 
 }
