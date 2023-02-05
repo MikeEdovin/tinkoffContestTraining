@@ -22,11 +22,19 @@ public static class Input {
             nrOfEmployes = Integer.parseInt(first[0]);
             time = Integer.parseInt(first[1]);
             floors = new int[nrOfEmployes];
+            if(nrOfEmployes<2||nrOfEmployes>100||time<2||time>100){
+                System.exit(0);
+            }
 
             String secondString = br.readLine();
             String[] second = secondString.split("\\s+");
             for (int i = 0; i < second.length; i++) {
-                floors[i] = Integer.parseInt(second[i]);
+                int floor=Integer.parseInt(second[i]);
+                if(floor>100){
+                    System.exit(0);
+                }
+                floors[i] = floor;
+
             }
             String third = br.readLine();
             timePerson = Integer.parseInt(third)-1;
