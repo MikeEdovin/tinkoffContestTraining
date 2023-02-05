@@ -16,8 +16,8 @@ public class Main {
 public static class Input {
     private long start;
     private long end;
-    private long nrOfStartDigits;
-    private long nrOfEndDigits;
+    private int nrOfStartDigits;
+    private int nrOfEndDigits;
     private List<Long> generatedStart=new LinkedList<>();
     private List<Long>generatedEnd=new LinkedList<>();
     private long result;
