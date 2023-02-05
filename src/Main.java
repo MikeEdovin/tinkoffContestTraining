@@ -16,8 +16,8 @@ public class Main {
 public static class Input {
     private long start;
     private long end;
-    private int nrOfStartDigits;
-    private int nrOfEndDigits;
+    private byte nrOfStartDigits;
+    private byte nrOfEndDigits;
     private List<Long> generatedStart=new LinkedList<>();
     private List<Long>generatedEnd=new LinkedList<>();
     private long result;
@@ -26,19 +26,26 @@ public static class Input {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String string = br.readLine();
             String[] first = string.split("\\s+");
-            start = Long.parseLong(first[0]);
-            end = Long.parseLong(first[1]);
+           if(first[1].length()<10) {
+               start = Integer.parseInt(first[0]);
+               end = Integer.parseInt(first[1]);
+           }
+           else{
+               start = Long.parseLong(first[0]);
+               end = Long.parseLong(first[1]);
+           }
+
+
             if(end<start){
                 System.exit(0);
             }
-            nrOfStartDigits= first[0].length();
-            nrOfEndDigits=first[1].length();
+            nrOfStartDigits= (byte) first[0].length();
+            nrOfEndDigits= (byte) first[1].length();
         } catch (IOException|ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
     }
     public void calculate() {
-
             result = (nrOfEndDigits - nrOfStartDigits) * 9 + 9;
             for (long item : generatedStart) {
                 if (item < start) {
@@ -60,21 +67,21 @@ public static class Input {
     }
     private void generateBegin(){
         for(int i=1;i<10;i++) {
-            String digit=String.valueOf(i);
+            StringBuilder digit= new StringBuilder(String.valueOf(i));
             for (int j =1; j<nrOfStartDigits;j++) {
-                 digit=digit+ i;
+                 digit.append(i);
             }
-            generatedStart.add(Long.parseLong(digit));
+            generatedStart.add(Long.parseLong(digit.toString()));
         }
 
     }
     private void generateEnd(){
         for(int i=9;i>0;i--) {
-            String digit=String.valueOf(i);
+            StringBuilder digit= new StringBuilder(String.valueOf(i));
             for (int j =1; j<nrOfEndDigits;j++) {
-                digit=digit+ i;
+                digit.append(i);
             }
-            generatedEnd.add(Long.parseLong(digit));
+            generatedEnd.add(Long.parseLong(digit.toString()));
         }
     }
     public void display(){
